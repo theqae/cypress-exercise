@@ -62,5 +62,8 @@ describe ('automation-exercise', () => {
     cy.get('[data-qa="city"]').type('Beachville').should('have.value', 'Beachville')
     cy.get('[data-qa="zipcode"]').type('55555').should('have.value', '55555')
     cy.get('[data-qa="mobile_number"]').type('(555) 565-6755').should('have.value', '(555) 565-6755')
+    
+    //Create Account
+    cy.get('[data-qa="create-account"]').click()
   })
 })
