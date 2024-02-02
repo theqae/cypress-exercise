@@ -38,6 +38,9 @@ describe ('automation-exercise', () => {
     cy.get('[data-qa="name"]').should('have.value', fName)
     cy.get('[data-qa="email"]').should('have.value', email)
     cy.get('[data-qa="password"]').type(password).should('have.value', password)
+    cy.get('[data-qa="days"]').select('2').should('have.value', '2') //Date of Birth - Day
+    cy.get('[data-qa="months"]').select('2').should('have.value','2') //Date of Birth - Month
+    cy.get('[data-qa="years"]').select('1980').should('have.value','1980') // Date of Birth - Year 
 
     //Check 'Sign Up for Our News Letter'
     cy.get('#newsletter').check() //Used the element's ID because no qa-data tag exists
