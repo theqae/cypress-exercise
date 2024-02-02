@@ -17,6 +17,9 @@ describe ('automation-exercise', () => {
     let fName = 'Boden'
     let email = 'qaTest@example.com'
     let password = 'Password1'
+    let addressFName = 'Courtney'
+    let addressLName = 'Coffee'
+    
     //Click Signup/Login (this also verifies the button exists)
     cy.contains('Signup / Login').click()
 
@@ -33,7 +36,7 @@ describe ('automation-exercise', () => {
     //Verify "Enter Account Information" exists
     cy.contains('Enter Account Information')
 
-    //Fill the form and assert the expected values were entered
+    //Fill Account information while asserting the expected values
     cy.get('#id_gender1').click() //Used the element's ID because the radio buttons share the same data-qa tag
     cy.get('[data-qa="name"]').should('have.value', fName)
     cy.get('[data-qa="email"]').should('have.value', email)
@@ -47,5 +50,17 @@ describe ('automation-exercise', () => {
     
     //Check 'Receive special offers from our partners!'
     cy.get('#optin').check() //Used the element's ID because no qa-data tag exists
+
+    //Fill Address information
+    cy.get('[data-qa="first_name"]').type(addressFName).should('have.value', addressFName)
+    cy.get('[data-qa="last_name"]').type(addressLName).should('have.value', addressLName)
+    cy.get('[data-qa="company"]').type('TheQAEngineer').should('have.value', 'TheQAEngineer')
+    cy.get('[data-qa="address"]').type('123 Main St.').should('have.value', '123 Main St.')
+    cy.get('[data-qa="address2"]').type('Apt 12').should('have.value', 'Apt 12')
+    cy.get('[data-qa="country"]').select('United States').should('have.value', 'United States')
+    cy.get('[data-qa="state"]').type('Pennsyltucky').should('have.value', 'Pennsyltucky')
+    cy.get('[data-qa="city"]').type('Beachville').should('have.value', 'Beachville')
+    cy.get('[data-qa="zipcode"]').type('55555').should('have.value', '55555')
+    cy.get('[data-qa="mobile_number"]').type('(555) 565-6755').should('have.value', '(555) 565-6755')
   })
 })
