@@ -39,7 +39,10 @@ describe ('automation-exercise', () => {
     cy.get('[data-qa="email"]').should('have.value', email)
     cy.get('[data-qa="password"]').type(password).should('have.value', password)
 
-    //Check the box for Sign Up for Our News Letter
+    //Check 'Sign Up for Our News Letter'
     cy.get('#newsletter').check() //Used the element's ID because no qa-data tag exists
+    
+    //Check 'Receive special offers from our partners!'
+    cy.get('#optin').check() //Used the element's ID because no qa-data tag exists
   })
 })
