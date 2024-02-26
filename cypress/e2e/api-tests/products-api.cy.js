@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 
-describe ('Products List API', () => {
+context('Products List API', () => {
   
     it("GET Products List", () => {
-      cy.request("GET", "https://automationexercise.com/api/productsList").then((response) => {
+      cy.request("GET", "/productsList").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -16,7 +16,7 @@ describe ('Products List API', () => {
 
 
     it("POST Products List", () => {
-      cy.request("POST", "https://automationexercise.com/api/productsList").then((response) => {
+      cy.request("POST", "/productsList").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -28,7 +28,7 @@ describe ('Products List API', () => {
   })
   context("Brands List API", () => {
     it("GET Brands List", () => {
-      cy.request("GET", "https://automationexercise.com/api/brandsList").then((response) => {
+      cy.request("GET", "/brandsList").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -39,7 +39,7 @@ describe ('Products List API', () => {
     })
 
     it("PUT Brands List", () => {
-      cy.request("PUT", "https://automationexercise.com/api/brandsList").then((response) => {
+      cy.request("PUT", "/brandsList").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -48,4 +48,21 @@ describe ('Products List API', () => {
         expect(parsedBody.message).to.eq('This request method is not supported.')
       })
     })
+  })
+
+  context("Search Product API", () => {
+    it("POST Search Products", () => {
+      cy.request({
+        method: 'POST',
+        url: 'searchProduct', // baseUrl is prepend to URL
+        //form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
+        body: {
+          search_product: 'top'
+        },
+      }).then((response) => {
+        let parsedBody = (JSON.parse(response.body))
+        // Assertions
+        expect(response.status).to.eq(200)
+    })
+  })
   })
