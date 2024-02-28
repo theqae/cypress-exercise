@@ -54,15 +54,17 @@ context('Products List API', () => {
     it("POST Search Products", () => {
       cy.request({
         method: 'POST',
-        url: 'searchProduct', // baseUrl is prepend to URL
-        //form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
+        url: '/searchProduct',
+        form: true, // Expected by the endpoint to read to contents of the body
         body: {
-          search_product: 'top'
-        },
-      }).then((response) => {
+          search_product: 'jean'
+          }
+      }).then((response) =>{
         let parsedBody = (JSON.parse(response.body))
         // Assertions
         expect(response.status).to.eq(200)
-    })
+        expect(parsedBody.responseCode).to.eq(200)
+        expect(parsedBody.products.length).to.eq(3)
+      })
   })
   })
