@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-    // Creating variables so we only need to change inputs in one place
+    // Variables used during test execution
     let firstName = faker.person.firstName()
     let lastName = faker.person.lastName()
     let email = faker.internet.email()

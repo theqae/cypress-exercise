@@ -13,8 +13,7 @@ context('Products List API', () => {
 
       })
     })
-
-
+    
     it("POST Products List", () => {
       cy.request("POST", "/productsList").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
