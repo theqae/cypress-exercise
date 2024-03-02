@@ -1,18 +1,18 @@
 import { faker } from '@faker-js/faker';
 
-    // Variables used during test execution
-    let firstName = faker.person.firstName()
-    let lastName = faker.person.lastName()
-    let email = faker.internet.email()
-    let password = 'Password1'
-    let address = faker.location.streetAddress()
-    let address2 = faker.location.secondaryAddress()
-    let country = 'United States'
-    let state = faker.location.state()
-    let city = faker.location.city()
-    let zipCode = faker.location.zipCode()
-    let phoneNumber = faker.phone.number()
-    let company = faker.company.name()
+// Variables used during test execution
+let firstName = faker.person.firstName()
+let lastName = faker.person.lastName()
+let email = faker.internet.email()
+let password = 'Password1'
+let address = faker.location.streetAddress()
+let address2 = faker.location.secondaryAddress()
+let country = 'United States'
+let state = faker.location.state()
+let city = faker.location.city()
+let zipCode = faker.location.zipCode()
+let phoneNumber = faker.phone.number()
+let company = faker.company.name()
 
 describe ('automation-exercise', () => {
   beforeEach(() => {
