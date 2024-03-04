@@ -78,5 +78,14 @@ describe ('automation-exercise', () => {
     cy.get('[data-qa="create-account"]').click()
     cy.url().should('eq', 'https://www.automationexercise.com/account_created') // Verify we are on the account created page
     cy.contains('Account Created!') // Verify 'Account Created!' appears on screen
+    
+    // Verify 'Logged in as username' is visible
+    cy.get('[data-qa="continue-button').click()
+    cy.contains('Logged in as '+ firstName)
+
+    //Delete Account
+    cy.get('a[href="/delete_account"]').click()
+    cy.contains('Account Deleted!')
+    cy.get('[data-qa="continue-button').click()
   })
 })

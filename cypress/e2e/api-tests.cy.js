@@ -212,14 +212,14 @@ context('Products List', () => {
   })
   context("User Detail By Email", () => {
     it("API 14: GET user account detail by email", () => {
-      cy.request("GET", "getUserDetailByEmail?email=${email}").then((response) => {
+      cy.request("GET", "/getUserDetailByEmail?email=" +email).then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
         expect(response.status).to.eq(200)
-        expect(parsedBody.responseCode).to.eq(200) // This syntax is required for parsing the JSON because the Response Header include 'content-type text/html; charset=utf-8' and not 'application/json'
-        expect(parsedBody.user.length).to.eq(1) // Check that we received all products in the Product List
-
+        expect(parsedBody.responseCode).to.eq(200)
+        expect(parsedBody.user.name).to.eq(firstName)
+        expect(parsedBody.user.email).to.eq(email)
       })
     })
   })
