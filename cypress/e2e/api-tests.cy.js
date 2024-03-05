@@ -17,7 +17,7 @@ let company = faker.company.name()
 context('Products List', () => {
   
     it("API 1: Get All Products List", () => {
-      cy.request("GET", "/productsList").then((response) => {
+      cy.request("GET", "/api/productsList").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -28,7 +28,7 @@ context('Products List', () => {
     })
     
     it("API 2: POST To All Products List", () => {
-      cy.request("POST", "/productsList").then((response) => {
+      cy.request("POST", "/api/productsList").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -40,7 +40,7 @@ context('Products List', () => {
   })
   context("Brands List", () => {
     it("API 3: Get All Brands List", () => {
-      cy.request("GET", "/brandsList").then((response) => {
+      cy.request("GET", "/api/brandsList").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -51,7 +51,7 @@ context('Products List', () => {
     })
 
     it("API 4: PUT To All Brands List", () => {
-      cy.request("PUT", "/brandsList").then((response) => {
+      cy.request("PUT", "/api/brandsList").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -66,7 +66,7 @@ context('Products List', () => {
     it("API 5: POST To Search Product", () => {
       cy.request({
         method: 'POST',
-        url: '/searchProduct',
+        url: '/api/searchProduct',
         form: true, // Expected by the endpoint to read to contents of the body
         body: {
           search_product: 'jean'
@@ -80,7 +80,7 @@ context('Products List', () => {
       })
     })
     it("API 6: POST To Search Product without search_product parameter", () => {
-      cy.request("POST", "/searchProduct").then((response) => {
+      cy.request("POST", "/api/searchProduct").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -94,7 +94,7 @@ context('Products List', () => {
     it("API 11: POST To Create/Register User Account", () => {
       cy.request({
         method: 'POST',
-        url: '/createAccount',
+        url: '/api/createAccount',
         form: true, // Expected by the endpoint to read to contents of the body
         body: {
           name: firstName,
@@ -128,7 +128,7 @@ context('Products List', () => {
     it("API 7: POST To Verify Login with valid details", () => {
       cy.request({
         method: 'POST',
-        url: '/verifyLogin',
+        url: '/api/verifyLogin',
         form: true, // Expected by the endpoint to read to contents of the body
         body: {
           email: email,
@@ -145,7 +145,7 @@ context('Products List', () => {
     it("API 8: POST To Verify Login without email parameter", () => {
       cy.request({
         method: 'POST',
-        url: '/verifyLogin',
+        url: '/api/verifyLogin',
         form: true, // Expected by the endpoint to read to contents of the body
         body: {
           password: password
@@ -159,7 +159,7 @@ context('Products List', () => {
       })
     })
     it("API 9: DELETE To Verify Login", () => {
-      cy.request("DELETE", "/verifyLogin").then((response) => {
+      cy.request("DELETE", "/api/verifyLogin").then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
@@ -171,7 +171,7 @@ context('Products List', () => {
     it("API 10: POST To Verify Login with invalid details", () => {
       cy.request({
         method: 'POST',
-        url: '/verifyLogin',
+        url: '/api/verifyLogin',
         form: true, // Expected by the endpoint to read to contents of the body
         body: {
           email: "invalidEmail@test.com",
@@ -190,7 +190,7 @@ context('Products List', () => {
     it("API 13: PUT METHOD To Update User Account", () => {
       cy.request({
         method: 'PUT',
-        url: '/updateAccount',
+        url: '/api/updateAccount',
         form: true, // Expected by the endpoint to read to contents of the body
         body: {
           name: firstName,
@@ -212,7 +212,7 @@ context('Products List', () => {
   })
   context("User Detail By Email", () => {
     it("API 14: GET user account detail by email", () => {
-      cy.request("GET", "/getUserDetailByEmail?email=" +email).then((response) => {
+      cy.request("GET", "/api/getUserDetailByEmail?email=" +email).then((response) => {
         // Created a variable for the parsed JSON since we'll use it often  
         let parsedBody = (JSON.parse(response.body))
         // Assertions
