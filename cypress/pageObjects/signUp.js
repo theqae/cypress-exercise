@@ -62,5 +62,11 @@ class signUp {
             cy.get('[data-qa="mobile_number"]').type(fakerData.phoneNumber).should('have.value', fakerData.phoneNumber)
         })
     }
+
+    createAccount() {
+    cy.get('[data-qa="create-account"]').click()
+    cy.url().should('eq', 'https://www.automationexercise.com/account_created') // Verify we are on the account created page
+    cy.contains('Account Created!') // Verify 'Account Created!' appears on screen
+    }
 }
 module.exports = new signUp();

@@ -1,5 +1,5 @@
 import homePage from '../pageObjects/homePage'
-import signUp from '../pageObjects/signUp'
+import signUp, { createAccount } from '../pageObjects/signUp'
 
 describe ('automation-exercise', () => {
   beforeEach(() => {
@@ -28,6 +28,12 @@ describe ('automation-exercise', () => {
     signUp.checkNewsLetter()
     signUp.optInSpecialOffers()
     signUp.fillAddress()
+
+    signUp.createAccount()
+    
+    homePage.verifyLogin()
+
+
     
     /*// Create Account
     cy.get('[data-qa="create-account"]').click()

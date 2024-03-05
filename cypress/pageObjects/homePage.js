@@ -5,6 +5,15 @@ class homePage {
         cy.get('.signup-form').contains('New User Signup!')
     }
 
+    verifyLogin() {
+        // Verify 'Logged in as username' is visible
+        cy.generateFakeData('fakerData')
+        cy.fixture('fakerData').then((fakerData) => {
+        cy.get('[data-qa="continue-button').click()
+        cy.contains('Logged in as '+ fakerData.firstName)
+        })
+    }
+
 }
 
 module.exports = new homePage();
