@@ -23,3 +23,23 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import { faker } from '@faker-js/faker';
+
+Cypress.Commands.add('generateFakeData', (filename) => {
+    const fakerData = {
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        email: faker.internet.email(),
+        password: 'Password1',
+        address: faker.location.streetAddress(),
+        address2: faker.location.secondaryAddress(),
+        country: 'United States',
+        state: faker.location.state(),
+        city: faker.location.city(),
+        zipCode: faker.location.zipCode(),
+        phoneNumber: faker.phone.number(),
+        company: faker.company.name()
+    }
+
+    cy.writeFile('cypress/fixtures/fakerData.json', fakerData)
+})

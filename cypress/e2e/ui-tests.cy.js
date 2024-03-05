@@ -1,19 +1,3 @@
-import { faker } from '@faker-js/faker';
-
-// Variables used during test execution
-let firstName = faker.person.firstName()
-let lastName = faker.person.lastName()
-let email = faker.internet.email()
-let password = 'Password1'
-let address = faker.location.streetAddress()
-let address2 = faker.location.secondaryAddress()
-let country = 'United States'
-let state = faker.location.state()
-let city = faker.location.city()
-let zipCode = faker.location.zipCode()
-let phoneNumber = faker.phone.number()
-let company = faker.company.name()
-
 describe ('automation-exercise', () => {
   beforeEach(() => {
     // Cypress starts out with a blank slate for each test
@@ -31,6 +15,8 @@ describe ('automation-exercise', () => {
   })
 
   it('Test Case 1: Register User', () => {
+    cy.generateFakeData('fakerData')
+    cy.fixture('fakerData').then((fakerData) => {
     // Click Signup/Login (this also verifies the button exists)
     cy.contains('Signup / Login').click()
 
@@ -38,8 +24,8 @@ describe ('automation-exercise', () => {
     cy.get('.signup-form').contains('New User Signup!')
 
     // Enter name and email then assert that the values were entered
-    cy.get('[data-qa="signup-name"]').type(firstName).should('have.value', firstName)
-    cy.get('[data-qa="signup-email"]').type(email).should('have.value', email)
+    cy.get('[data-qa="signup-name"]').type(fakerData.firstName).should('have.value', fakerData.firstName)
+    cy.get('[data-qa="signup-email"]').type(fakerData.email).should('have.value', fakerData.email)
 
     // Click Signup (this also verifies the button exists)
     cy.get('[data-qa="signup-button"]').click()
@@ -49,9 +35,9 @@ describe ('automation-exercise', () => {
 
     // Fill Account information while asserting the expected values
     cy.get('#id_gender1').click() // Used the element's ID because the radio buttons share the same data-qa tag
-    cy.get('[data-qa="name"]').should('have.value', firstName)
-    cy.get('[data-qa="email"]').should('have.value', email)
-    cy.get('[data-qa="password"]').type(password).should('have.value', password)
+    cy.get('[data-qa="name"]').should('have.value', fakerData.firstName)
+    cy.get('[data-qa="email"]').should('have.value', fakerData.email)
+    cy.get('[data-qa="password"]').type(fakerData.password).should('have.value', fakerData.password)
     cy.get('[data-qa="days"]').select('2').should('have.value', '2') // Date of Birth - Day
     cy.get('[data-qa="months"]').select('2').should('have.value','2') // Date of Birth - Month
     cy.get('[data-qa="years"]').select('1980').should('have.value','1980') // Date of Birth - Year 
@@ -63,16 +49,16 @@ describe ('automation-exercise', () => {
     cy.get('#optin').check() //Used the element's ID because no qa-data tag exists
 
     // Fill Address information
-    cy.get('[data-qa="first_name"]').type(firstName).should('have.value', firstName)
-    cy.get('[data-qa="last_name"]').type(lastName).should('have.value', lastName)
-    cy.get('[data-qa="company"]').type(company).should('have.value', company)
-    cy.get('[data-qa="address"]').type(address).should('have.value', address)
-    cy.get('[data-qa="address2"]').type(address2).should('have.value', address2)
-    cy.get('[data-qa="country"]').select(country).should('have.value', country)
-    cy.get('[data-qa="state"]').type(state).should('have.value', state)
-    cy.get('[data-qa="city"]').type(city).should('have.value', city)
-    cy.get('[data-qa="zipcode"]').type(zipCode).should('have.value', zipCode)
-    cy.get('[data-qa="mobile_number"]').type(phoneNumber).should('have.value', phoneNumber)
+    cy.get('[data-qa="first_name"]').type(fakerData.firstName).should('have.value', fakerData.firstName)
+    cy.get('[data-qa="last_name"]').type(fakerData.lastName).should('have.value', fakerData.lastName)
+    cy.get('[data-qa="company"]').type(fakerData.company).should('have.value', fakerData.company)
+    cy.get('[data-qa="address"]').type(fakerData.address).should('have.value', fakerData.address)
+    cy.get('[data-qa="address2"]').type(fakerData.address2).should('have.value', fakerData.address2)
+    cy.get('[data-qa="country"]').select(fakerData.country).should('have.value', fakerData.country)
+    cy.get('[data-qa="state"]').type(fakerData.state).should('have.value', fakerData.state)
+    cy.get('[data-qa="city"]').type(fakerData.city).should('have.value', fakerData.city)
+    cy.get('[data-qa="zipcode"]').type(fakerData.zipCode).should('have.value', fakerData.zipCode)
+    cy.get('[data-qa="mobile_number"]').type(fakerData.phoneNumber).should('have.value', fakerData.phoneNumber)
     
     // Create Account
     cy.get('[data-qa="create-account"]').click()
@@ -81,11 +67,12 @@ describe ('automation-exercise', () => {
     
     // Verify 'Logged in as username' is visible
     cy.get('[data-qa="continue-button').click()
-    cy.contains('Logged in as '+ firstName)
+    cy.contains('Logged in as '+ fakerData.firstName)
 
     //Delete Account
     cy.get('a[href="/delete_account"]').click()
     cy.contains('Account Deleted!')
     cy.get('[data-qa="continue-button').click()
+    })
   })
 })
