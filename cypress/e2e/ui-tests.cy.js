@@ -1,5 +1,6 @@
 import homePage from '../pageObjects/homePage'
 import signUp from '../pageObjects/signUp'
+import login from '../pageObjects/login'
 
 describe ('automation-exercise', () => {
   beforeEach(() => {
@@ -33,4 +34,12 @@ describe ('automation-exercise', () => {
     // Verify the newly created user is logged in
     homePage.verifyLogin()
     }) 
+
+    it('Test Case 2: Login User with correct email and password', () => {
+      // Select Sign Up / Login
+      homePage.clickSignUpLogin()
+      
+      // Login
+      login.userLogin()
+      }) 
 })
