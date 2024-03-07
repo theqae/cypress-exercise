@@ -1,4 +1,6 @@
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker'
+import createAccount from '../api/createAccount'
+import login from '../api/login'
 
 // Variables used during test execution
 let firstName = faker.person.firstName()
@@ -92,55 +94,12 @@ context('Products List', () => {
   })
   context("Create Account", () => {
     it("API 11: POST To Create/Register User Account", () => {
-      cy.request({
-        method: 'POST',
-        url: '/api/createAccount',
-        form: true, // Expected by the endpoint to read to contents of the body
-        body: {
-          name: firstName,
-          email: email,
-          password: password,
-          title: "Mr",
-          birth_date: "03",
-          birth_month: "02",
-          birth_year: "2024",
-          firstname: firstName,
-          lastname: lastName,
-          company: company,
-          address1: address, 
-          address2: address2,
-          country: country,
-          zipcode: zipCode,
-          state: state, 
-          city: city, 
-          mobile_number: phoneNumber
-          }
-      }).then((response) =>{
-        let parsedBody = (JSON.parse(response.body))
-        // Assertions
-        expect(response.status).to.eq(200)
-        expect(parsedBody.responseCode).to.eq(201)
-        expect(parsedBody.message).to.eq("User created!")
-      })
+      createAccount.registerNewUser()
     })
   })
   context("Login", () => {
     it("API 7: POST To Verify Login with valid details", () => {
-      cy.request({
-        method: 'POST',
-        url: '/api/verifyLogin',
-        form: true, // Expected by the endpoint to read to contents of the body
-        body: {
-          email: email,
-          password: password
-          }
-      }).then((response) =>{
-        let parsedBody = (JSON.parse(response.body))
-        // Assertions
-        expect(response.status).to.eq(200)
-        expect(parsedBody.responseCode).to.eq(200)
-        expect(parsedBody.message).to.eq("User exists!")
-      })
+      login.verifyLogin()
     })
     it("API 8: POST To Verify Login without email parameter", () => {
       cy.request({
