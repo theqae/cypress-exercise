@@ -15,6 +15,11 @@ class homePage {
         })
     }
 
+    deleteAccount() {
+        cy.contains(' Delete Account').click()
+        cy.contains('Account Deleted!')
+    }
+
 }
 
 module.exports = new homePage();

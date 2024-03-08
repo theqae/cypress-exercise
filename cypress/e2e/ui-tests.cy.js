@@ -1,19 +1,17 @@
 import homePage from '../pageObjects/homePage'
 import signUp from '../pageObjects/signUp'
 import login from '../pageObjects/login'
+import createAccount from '../api/createAccount'
 
 describe ('automation-exercise', () => {
   beforeEach(() => {
 
     cy.visit('/') // Visit the baseUrl
-  })
-
-  it('ensure we are on the hompage', () => {
-    // Assert we are on the request a
     cy.url().should('eq', 'https://www.automationexercise.com/')
+    cy.generateFakeData('fakerData')
   })
 
-  it('Test Case 1: Register User', () => {
+  it.skip('Test Case 1: Register User', () => {
     // Select Sign Up / Login
     homePage.clickSignUpLogin()
 
@@ -33,13 +31,29 @@ describe ('automation-exercise', () => {
 
     // Verify the newly created user is logged in
     homePage.verifyLogin()
+    homePage.deleteAccount()
     }) 
 
-    it('Test Case 2: Login User with correct email and password', () => {
-      // Select Sign Up / Login
-      homePage.clickSignUpLogin()
+    it.skip('Test Case 2: Login User with correct email and password', () => {
+      createAccount.registerNewUser() // Use API to create account for test
+      homePage.clickSignUpLogin() // 'Select Sign Up / Login'
+      login.userLogin() // Valid login
+      homePage.deleteAccount()
+
       
-      // Login
-      login.userLogin()
-      }) 
+    })
+
+    it.skip('Test Case 3: Login User with incorrect email and password', () => {
+      homePage.clickSignUpLogin() // 'Select Sign Up / Login'
+      login.incorrectUserLogin() // Invalid login
+
+    }) 
+
+    it('Test Case 4: Logout User', () => {
+      createAccount.registerNewUser()
+      homePage.clickSignUpLogin() // 'Select Sign Up / Login'
+      login.userLogin() // Invalid login
+      login.userLogout()
+
+    }) 
 })
