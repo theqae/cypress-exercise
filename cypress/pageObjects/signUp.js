@@ -1,16 +1,16 @@
 class signUp {
 
     fillFirstName() {
-        cy.generateFakeData('fakerData')
-        cy.fixture('fakerData').then((fakerData) => { 
+        //cy.generateFakeData('fakerData')
+        cy.readFile('./cypress/fixtures/fakerData.json').then((fakerData) => { 
             cy.get('[data-qa="signup-name"]').type(fakerData.firstName).should('have.value', fakerData.firstName)
         })
         
     }    
 
     fillEmail() {
-        cy.generateFakeData('fakerData')
-        cy.fixture('fakerData').then((fakerData) => {
+        //cy.generateFakeData('fakerData')
+        cy.readFile('./cypress/fixtures/fakerData.json').then((fakerData) => {
             cy.get('[data-qa="signup-email"]').type(fakerData.email).should('have.value', fakerData.email)
         })
     }
@@ -22,9 +22,15 @@ class signUp {
         // Verify "Enter Account Information" exists
         cy.contains('Enter Account Information')
     }
+
+    existingUserClickSignUp() {
+        cy.get('[data-qa="signup-button"]').click()
+        cy.contains('Email Address already exist!')
+    }
+
     fillAccount() {
-        cy.generateFakeData('fakerData')
-        cy.fixture('fakerData').then((fakerData) => { 
+        //cy.generateFakeData('fakerData')
+        cy.readFile('./cypress/fixtures/fakerData.json').then((fakerData) => { 
             //Fill Address Section
             cy.get('#id_gender1').click() // Used the element's ID because the radio buttons share the same data-qa tag
             cy.get('[data-qa="name"]').should('have.value', fakerData.firstName)
@@ -47,8 +53,8 @@ class signUp {
     }
 
     fillAddress() {
-        cy.generateFakeData('fakerData')
-        cy.fixture('fakerData').then((fakerData) => { 
+        //cy.generateFakeData('fakerData')
+        cy.readFile('./cypress/fixtures/fakerData.json').then((fakerData) => { 
             // Fill Address Section
             cy.get('[data-qa="first_name"]').type(fakerData.firstName).should('have.value', fakerData.firstName)
             cy.get('[data-qa="last_name"]').type(fakerData.lastName).should('have.value', fakerData.lastName)
@@ -68,5 +74,6 @@ class signUp {
     cy.url().should('eq', 'https://www.automationexercise.com/account_created') // Verify we are on the account created page
     cy.contains('Account Created!') // Verify 'Account Created!' appears on screen
     }
+
 }
 module.exports = new signUp();

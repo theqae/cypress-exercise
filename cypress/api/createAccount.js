@@ -1,7 +1,7 @@
 class createAccount {
     registerNewUser() {
-        cy.generateFakeData('fakerData')
-        cy.fixture('fakerData').then((fakerData) => {
+        //cy.generateFakeData('fakerData')
+        cy.readFile('./cypress/fixtures/fakerData.json').then((fakerData) => {
             cy.request({
                 method: 'POST',
                 url: '/api/createAccount',

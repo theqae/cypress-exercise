@@ -8,8 +8,8 @@ class homePage {
 
     verifyLogin() {
         // Verify 'Logged in as username' is visible
-        cy.generateFakeData('fakerData')
-        cy.fixture('fakerData').then((fakerData) => {
+        //cy.generateFakeData('fakerData')
+        cy.readFile('./cypress/fixtures/fakerData.json').then((fakerData) => {
         cy.get('[data-qa="continue-button"]').click()
         cy.contains('Logged in as '+ fakerData.firstName)
         })

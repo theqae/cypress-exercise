@@ -1,14 +1,14 @@
 class login {
     verifyLogin() {
-        cy.generateFakeData('fakerData')
-        cy.fixture('fakerData').then((fakerData) => {
+        //cy.generateFakeData('fakerData')
+        cy.readFile('./cypress/fixtures/fakerData.json').then((fakerData) => {
             cy.request({
                 method: 'POST',
                 url: '/api/verifyLogin',
                 form: true, // Expected by the endpoint to read to contents of the body
                 body: {
-                email: email,
-                password: password
+                email: fakerData.email,
+                password: fakerData.password
                 }
             }).then((response) =>{
                     let parsedBody = (JSON.parse(response.body))

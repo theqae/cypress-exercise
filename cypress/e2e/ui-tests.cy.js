@@ -5,10 +5,10 @@ import createAccount from '../api/createAccount'
 
 describe ('automation-exercise', () => {
   beforeEach(() => {
-
     cy.visit('/') // Visit the baseUrl
     cy.url().should('eq', 'https://www.automationexercise.com/')
     cy.generateFakeData('fakerData')
+
   })
 
   it.skip('Test Case 1: Register User', () => {
@@ -32,6 +32,7 @@ describe ('automation-exercise', () => {
     // Verify the newly created user is logged in
     homePage.verifyLogin()
     homePage.deleteAccount()
+
     }) 
 
     it.skip('Test Case 2: Login User with correct email and password', () => {
@@ -52,8 +53,17 @@ describe ('automation-exercise', () => {
     it('Test Case 4: Logout User', () => {
       createAccount.registerNewUser()
       homePage.clickSignUpLogin() // 'Select Sign Up / Login'
-      login.userLogin() // Invalid login
+      login.userLogin()
       login.userLogout()
+
+    })
+    
+    it('Test Case 5: Register User with existing email', () => {
+      createAccount.registerNewUser()
+      homePage.clickSignUpLogin() // 'Select Sign Up / Login'
+      signUp.fillFirstName()
+      signUp.fillEmail()
+      signUp.existingUserClickSignUp()
 
     }) 
 })
