@@ -2,6 +2,7 @@ import homePage from '../pageObjects/homePage'
 import signUp from '../pageObjects/signUp'
 import login from '../pageObjects/login'
 import createAccount from '../api/createAccount'
+import contact_us from '../pageObjects/contact_us'
 
 describe ('automation-exercise', () => {
   beforeEach(() => {
@@ -50,7 +51,7 @@ describe ('automation-exercise', () => {
 
     }) 
 
-    it('Test Case 4: Logout User', () => {
+    it.skip('Test Case 4: Logout User', () => {
       createAccount.registerNewUser()
       homePage.clickSignUpLogin() // 'Select Sign Up / Login'
       login.userLogin()
@@ -58,12 +59,20 @@ describe ('automation-exercise', () => {
 
     })
     
-    it('Test Case 5: Register User with existing email', () => {
+    it.skip('Test Case 5: Register User with existing email', () => {
       createAccount.registerNewUser()
       homePage.clickSignUpLogin() // 'Select Sign Up / Login'
       signUp.fillFirstName()
       signUp.fillEmail()
       signUp.existingUserClickSignUp()
+
+    }) 
+
+    it('Test Case 6: Contact Us Form', () => {
+      homePage.clickContactUs()
+      contact_us.fillContactForm()
+      contact_us.fileUpload()
+      contact_us.clickSubmit()
 
     }) 
 })

@@ -6,6 +6,11 @@ class homePage {
         cy.get('.login-form').contains('Login to your account')
     }
 
+    clickContactUs() {
+        cy.get('a[href*="contact_us"]').click()
+        cy.contains('Get In Touch')
+    }
+
     verifyLogin() {
         // Verify 'Logged in as username' is visible
         //cy.generateFakeData('fakerData')
